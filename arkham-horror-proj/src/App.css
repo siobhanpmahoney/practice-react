@@ -1,0 +1,102 @@
+body {
+  margin: 1em;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+h1 {
+
+  text-transform: uppercase;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "Droid sans";
+  letter-spacing: 1px;
+  font-weight: 800px;
+}
+
+th.cardName, th.cardType, th.cardClass {
+  width: 28%;
+  border-right: groove;
+  border-left: hidden;
+}
+
+table {
+  align-self: center;
+  border-left: groove;
+  border-top: groove;
+  border-right: none;
+}
+
+tr, td {
+  padding: 6px;
+  align: center;
+  font-family: "Droid serif";
+  font-size: 13px;
+}
+
+td {
+  border-bottom: groove;
+  border-right: groove;;
+  border-left: hidden;
+
+  align: center;
+  width: absolute;
+}
+
+.quantity {
+  border-left: none;
+}
+
+.cardClass {
+  border-right: none;
+}
+
+.myDeck {
+  float: left;
+  border: groove;
+  padding: 12px;
+}
+
+.myDeckClear {
+  clear: both
+}
+
+#myDeckContainer {
+  background-color: #04125f;
+}
+
+th {
+  align: center;
+  font-family: "droid sans";
+  font-weight: 800px;
+  border-style: groove;
+  border-top: none;
+}
