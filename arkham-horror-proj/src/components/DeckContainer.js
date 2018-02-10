@@ -1,6 +1,6 @@
 import React from 'react'
 import MyDeck from './MyDeck'
-import FullDeck from './FullDeck'
+import DisplayDeck from './DisplayDeck'
 import Filter from './Filter'
 
 class DeckContainer extends React.Component {
@@ -10,22 +10,21 @@ class DeckContainer extends React.Component {
     this.state={
       myDeck: [],
       fullDeck: [],
-      filteredDeck: []
+      displayDeck: [],
+      typesChecked: []
     }
   }
 
   componentDidMount() {
-
     fetch("https://arkhamdb.com/api/public/cards/")
     .then(response => response.json())
     .then(json => this.setState({
       fullDeck: json,
-      filteredDeck: json
+      displayDeck: json
     }))
   }
 
   handleAddCard = (card, value) => {
-
     const totalCount = this.state.myDeck.filter((c) => c.url === card.url).length
     const currentDeck = this.state.myDeck
 
@@ -56,17 +55,17 @@ class DeckContainer extends React.Component {
 
   handleFilterName = (event) => {
     event.preventDefault()
-    const allCards = this.state.filteredDeck
-    const filteredDeck = allCards.filter((c) => {
+    const allCards = this.state.fullDeck.slice()
+    const filterDeck = allCards.filter((c) => {
       return c.real_name.includes(event.target.value)
     })
     if (event.target.value === "") {
       this.setState({
-        fullDeck: allCards
+        displayDeck: allCards
       })
     } else {
       this.setState({
-        fullDeck: filteredDeck
+        displayDeck: filterDeck
       })
     }
   }
@@ -82,9 +81,32 @@ class DeckContainer extends React.Component {
     return uniqTypes
   }
 
-  handleFilterTypeSelection = (event) => {
-    event.preventDefault()
+  handleCheckBoxChange = (event) => {
+    let currentFilters = this.state.typesChecked.slice()
+    if (event.target.checked) {
+      currentFilters.push(event.target.value)
+    } else {
+      currentFilters.splice(currentFilters.indexOf(event.target.value), 1)
+    }
+    this.setState({
+      typesChecked: currentFilters
+    });
+  }
 
+  displayFilteredByType = () => {
+    let cardsToDisplay = []
+
+    this.state.fullDeck.forEach((card) => {
+      if (this.state.typesChecked.length > 0) {
+        if (this.state.typesChecked.includes(card.type_name)) {
+          cardsToDisplay.push(card)
+        }
+      }
+      else {
+        cardsToDisplay = this.state.displayDeck
+      }
+    })
+    return cardsToDisplay
   }
 
   render() {
@@ -92,8 +114,8 @@ class DeckContainer extends React.Component {
       <div>
       <p>test dc</p>
       <MyDeck myDeck={this.state.myDeck} />
-      <Filter handleFilterName={this.handleFilterName} filterTypes={this.filterTypes} handleFilterTypeSelection={this.handleFilterTypeSelection}/>
-      <FullDeck fullDeck={this.state.fullDeck} filterTypes={this.filterTypes()}/>
+      <Filter handleFilterName={this.handleFilterName} filterTypes={this.filterTypes()}  handleCheckBoxChange={this.handleCheckBoxChange}/>
+      <DisplayDeck displayDeck={this.displayFilteredByType()} filterTypes={this.filterTypes()} />
       </div>
     )
   }

@@ -1,25 +1,30 @@
 import React from 'react';
 
-const Filter = ({handleFilterName, fullDeck, filterTypes, handleFilterTypeSelection}) => {
+const Filter = ({handleFilterName, displayDeck, filterTypes, handleCheckBoxChange}) => {
 
-  const typeOptions = filterTypes()
+  const typeOptions = filterTypes
 
   return(
 
-    <div>
-      <span className="filter">
-      <input type="text" onChange={handleFilterName} />
-        Type:
-        <select onChange={handleFilterTypeSelection}>
-          <option value="all">All</option>
-          {typeOptions.map((type) => {
-            return <option value={type}>{type}</option>
-          })}
-        </select>
-        Class:
-        <select>
-        </select>
-      </span>
+    <div className="myDeckClear">
+      <div className="nameFilter">
+        <span className="informalTitle myDeckClear">Filter Cards By Name:</span>
+      <div className="searchBox"><input type="text" onChange={handleFilterName} /></div>
+
+<div className="filterByType myDeckClear" >
+<span className="informalTitle myDeckClear">Filter Cards By Type:</span>
+    <div className="filterByTypeOptions">
+    <form>
+    <ul>
+      {typeOptions.map((type) => {
+        return <li><label><input type="checkbox" value={type} label={type} onChange={handleCheckBoxChange} />{type}</label></li>
+        })}
+      </ul>
+      </form>
+    </div>
+  </div>
+
+</div>
     </div>
   )
 }
