@@ -93,6 +93,25 @@ td {
   background-color: #04125f;
 }
 
+.filterByTypeOptions {
+  column-fill: auto;
+  columns: 50px 2;
+}
+
+.informalTitle{
+  width: 100%;
+}
+
+.filterByType {
+  padding: 1em;
+  margin: 1em;
+  width: 300px;
+}
+
+.searchBox {
+  padding: 0.5em;
+}
+
 th {
   align: center;
   font-family: "droid sans";

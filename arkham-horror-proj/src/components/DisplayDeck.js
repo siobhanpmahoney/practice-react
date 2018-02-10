@@ -1,8 +1,8 @@
 import React from 'react'
 import Card from './Card'
 
-const FullDeck = ({fullDeck, handleAddCard}) => {
-
+const DisplayDeck = ({displayDeck, handleAddCard}) => {
+  const display = displayDeck
   return(
       <div className="myDeckClear">
         <h2>Checkout the Full Deck</h2>
@@ -18,7 +18,7 @@ const FullDeck = ({fullDeck, handleAddCard}) => {
           <tbody>
 
 
-        {fullDeck.map((c) => {
+        {display.map((c) => {
           return <Card card={c} key={c.url} handleAddCard={handleAddCard}/>
         })}
         </tbody>
@@ -27,4 +27,4 @@ const FullDeck = ({fullDeck, handleAddCard}) => {
   )
 }
 
-export default FullDeck
+export default DisplayDeck
