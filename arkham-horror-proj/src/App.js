@@ -1,16 +1,26 @@
 import React from 'react'
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 import './App.css';
+
+import logo from './logo.svg';
+import NavBar from './components/NavBar'
 import DeckContainer from './components/DeckContainer'
+import MyDeck from './components/MyDeck'
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Arkham Mania</h1>
-        <div><DeckContainer /></div>
+      <Router>
+        <div>
+          <NavBar />
+          <Route exact path="/allcards" render={DeckContainer} />
+          <Route exact path="/mycards" render={MyDeck} />
+        </div>
+      </Router>
 
-      </div>
     );
   }
 }
